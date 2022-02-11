@@ -17,7 +17,7 @@ import PrivateRoute from '../common/PrivateRoute';
 import './App.css';
 
 import { Layout, notification } from 'antd';
-const { Content } = Layout;
+// const { Content } = Layout;
 
 class App extends Component {
   constructor(props) {
@@ -89,16 +89,15 @@ class App extends Component {
 
     return (
         <Layout className="app-container">
-          <Router><Routes>
             <AppHeader isAuthenticated={this.state.isAuthenticated} 
-              currentUser={this.state.currentUser} 
-              onLogout={this.handleLogout} />
-
-            <Content className="app-content">
-              <div className="container">
+                currentUser={this.state.currentUser} 
+                onLogout={this.handleLogout} props={this.props} />
+            {/* <Content className="app-content">
+              <div className="container"> */}
+          <Router><Routes>
                   <Route exact path="/" 
-                    render={(props) => <PollList isAuthenticated={this.state.isAuthenticated} 
-                        currentUser={this.state.currentUser} handleLogout={this.handleLogout} {...props} />}>
+                    element={<PollList isAuthenticated={this.state.isAuthenticated} 
+                        currentUser={this.state.currentUser} handleLogout={this.handleLogout} />}>
                   </Route>
                   <Route path="/login" 
                     render={(props) => <Login onLogin={this.handleLogin} {...props} />}></Route>
@@ -106,10 +105,12 @@ class App extends Component {
                   <Route path="/users/:username" 
                     render={(props) => <Profile isAuthenticated={this.state.isAuthenticated} currentUser={this.state.currentUser} {...props}  />}>
                   </Route>
-                  <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewPoll} handleLogout={this.handleLogout}></PrivateRoute>
-                  <Route component={NotFound}></Route>
-              </div>
-            </Content>
+                  <Route path="/poll/new" element={
+                    <PrivateRoute authenticated={this.state.isAuthenticated} path="/poll/new" component={NewPoll} handleLogout={this.handleLogout}></PrivateRoute>
+                  } />
+                  <Route component={NotFound} />
+              {/* </div>
+            </Content> */}
           </Routes></Router>
         </Layout>
     );

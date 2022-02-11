@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { withRouter } from '../util/withRouterWrapper';
+import { Link, Router } from 'react-router-dom';
 import './AppHeader.css';
 import pollIcon from '../poll.svg';
 import { Layout, Menu, Dropdown } from 'antd';
@@ -46,12 +45,13 @@ class AppHeader extends Component {
             </Menu.Item>,
             <Menu.Item key="/signup">
               <Link to="/signup">Signup</Link>
-            </Menu.Item>                  
+            </Menu.Item>
           ];
         }
 
         return (
-            <Header className="app-header">
+          <Router location={this.props.location}>
+          <Header className="app-header">
             <div className="container">
               <div className="app-title" >
                 <Link to="/">Polling App</Link>
@@ -65,6 +65,7 @@ class AppHeader extends Component {
               </Menu>
             </div>
           </Header>
+          </Router>
         );
     }
 }
@@ -103,4 +104,4 @@ function ProfileDropdownMenu(props) {
 }
 
 
-export default withRouter(AppHeader);
+export default AppHeader;

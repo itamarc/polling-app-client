@@ -6,7 +6,6 @@ import LoadingIndicator  from '../common/LoadingIndicator';
 import { Button, notification } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { POLL_LIST_SIZE } from '../constants';
-import { withRouter } from '../util/withRouterWrapper';
 import './PollList.css';
 
 class PollList extends Component {
@@ -170,14 +169,14 @@ class PollList extends Component {
                                 <PlusOutlined /> Load more
                             </Button>
                         </div>): null
-                }              
+                }
                 {
                     this.state.isLoading ? 
-                    <LoadingIndicator />: null                     
+                    <LoadingIndicator />: null
                 }
             </div>
         );
     }
 }
 
-export default withRouter(PollList);
+export default PollList;
